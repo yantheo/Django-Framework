@@ -1,0 +1,51 @@
+{% load static %}
+{% url 'sales:home' as path_to_home %}
+{% url 'sales:list' as path_to_sales %}
+{% url 'reports:from-file' as path_to_files %}
+{% url 'reports:main' as path_to_reports %}
+{% url 'profiles:my' as path_to_profile %}
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="{{ path_to_home }}"><img class="logo" src="{% static 'logo.svg' %}" alt="logo"></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link {% if request.path == path_to_home %}active{% endif %}" href="{{ path_to_home }}">Home <span
+            class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link {% if request.path == path_to_sales %}active{% endif %}" href="{{ path_to_sales }}">Sales
+        </a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link {% if request.path == path_to_files %}active{% endif %}" href="{{ path_to_files }}">Add files
+        </a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link {% if request.path == path_to_reports %}active{% endif %}"
+          href="{{ path_to_reports }}">Reports </a>
+      </li>
+      {% if request.user.is_authenticated %}
+      <li class="nav-item dropdown">
+        <div class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          <img class="avatar-sm" src="{{request.user.profile.avatar.url}}" alt="">&nbsp;{{request.user}}
+        </div>
+        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <li>
+            <a class="dropdown-item" href="{{ path_to_profile }}">Profile</a>
+          </li>
+          <li>
+            <a class="dropdown-item" href="{% url 'logout' %}">Log Out</a>
+          </li>
+        </ul>
+      </li>
+      {% endif %}
+    </ul>
+  </div>
+</nav>

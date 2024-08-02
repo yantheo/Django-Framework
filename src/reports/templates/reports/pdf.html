@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Report pdf : {{obj.name}}</title>
+    <style>
+      .image {
+        width: 100%;
+        height: auto;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>
+      {{obj.name}}
+    </h1>
+    <hr>
+    <img src="{{obj.image.path}}" class="image" alt="{{obj.name}}">
+    <br>
+    <h3>Remarks</h3>
+    <p>
+      {{obj.remarks}}
+    </p>
+    <hr>
+    <p>Author: {{obj.author}}</p>
+    <p>Created: {{obj.created}}</p>
+  </body>
+
+</html>
